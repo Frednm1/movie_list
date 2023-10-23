@@ -8,6 +8,7 @@ Objetivo: Criar um aplicativo Flutter que consulta a API IMDB
 para listar filmes, exibir detalhes de filmes e permitir salvar filmes como favoritos no Firebase
 
 Api utilizada: http://www.omdbapi.com/
+
 packages utilizados:
 provider: ^6.0.5
 http: ^1.1.0

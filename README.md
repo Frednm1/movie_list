@@ -1,16 +1,13 @@
 # movie_list
 
-A new Flutter project.
+App de busca de filmes
 
-## Getting Started
+Aplicativo de Filmes com IMDB e Firebase Objetivo: Criar um aplicativo Flutter que consulta a API IMDB
+para listar filmes, exibir detalhes de filmes e permite salvar filmes como favoritos no Firebase
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Api utilizada: http://www.omdbapi.com/
+packages utilizados:
+provider: ^6.0.5
+http: ^1.1.0
+firebase_core: ^2.19.0
+cloud_firestore: ^4.11.0

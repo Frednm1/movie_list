@@ -70,181 +70,198 @@ class _MovieDescriptionState extends State<MovieDescription> {
                         height: 20,
                       ),
                       Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 1),
+                          child: movieDescription.title != null
+                              ? Wrap(
+                                  children: [
+                                    const Text(
+                                      'Title: ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      movieDescription.title!,
+                                    ),
+                                  ],
+                                )
+                              : Container()),
+                      Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Title: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.title ?? 'N/A',
-                            ),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Plot: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.plot!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 30, vertical: 1),
+                          child: movieDescription.title != null
+                              ? Wrap(
+                                  children: [
+                                    const Text(
+                                      'Runtime: ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      movieDescription.runtime!,
+                                    ),
+                                  ],
+                                )
+                              : Container()),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 30, vertical: 1),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Year: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.year!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Plot: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.plot ?? 'N/A',
-                            ),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Genre: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.genre!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Runtime: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.runtime ?? 'N/A',
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Year: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.year ?? 'N/A',
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Genre: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.genre ?? 'N/A',
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30, vertical: 1),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Director: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.director ?? 'N/A',
-                            ),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Director: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.director!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 1,
                         ),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Writer: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.writer ?? 'N/A',
-                            ),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Writer: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.writer!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 1,
                         ),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Actors: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              movieDescription.actors ?? 'N/A',
-                            ),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Actors: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    movieDescription.actors!,
+                                  ),
+                                ],
+                              )
+                            : Container(),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 30,
                           vertical: 1,
                         ),
-                        child: Wrap(
-                          children: [
-                            const Text(
-                              'Ratings: ',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            movieDescription.ratings?.isNotEmpty == true
-                                ? ListView.builder(
-                                    itemCount: movieDescription.ratings!.length,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    itemBuilder: (context, i) {
-                                      return Wrap(
-                                        children: [
-                                          Text(
-                                            ' *${movieDescription.ratings![i]!.source} :',
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                          Text(
-                                              '${movieDescription.ratings![i]!.value}')
-                                        ],
-                                      );
-                                    })
-                                : const Text('N/A'),
-                          ],
-                        ),
+                        child: movieDescription.title != null
+                            ? Wrap(
+                                children: [
+                                  const Text(
+                                    'Ratings: ',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  movieDescription.ratings?.isNotEmpty == true
+                                      ? ListView.builder(
+                                          itemCount:
+                                              movieDescription.ratings!.length,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemBuilder: (context, i) {
+                                            return Wrap(
+                                              children: [
+                                                Text(
+                                                  ' *${movieDescription.ratings![i]!.source} :',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                Text(
+                                                    '${movieDescription.ratings![i]!.value}')
+                                              ],
+                                            );
+                                          })
+                                      : const Text('N/A'),
+                                ],
+                              )
+                            : Container(),
                       ),
                       const SizedBox(
                         height: 40,

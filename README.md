@@ -2,7 +2,8 @@
 
 App de busca de filmes
 
-Aplicativo de Filmes com IMDB e Firebase Objetivo: Criar um aplicativo Flutter que consulta a API IMDB
+Aplicativo de Filmes com IMDB e Firebase 
+Objetivo: Criar um aplicativo Flutter que consulta a API IMDB
 para listar filmes, exibir detalhes de filmes e permite salvar filmes como favoritos no Firebase
 
 Api utilizada: http://www.omdbapi.com/

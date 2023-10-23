@@ -2,11 +2,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:movie_list/controllers/favorites_controller.dart';
 import 'package:movie_list/models/movie_description_model.dart';
 
 import 'package:movie_list/models/movies_model.dart';
 import 'package:movie_list/pages/loading_page.dart';
 import 'package:movie_list/services/request.dart';
+import 'package:provider/provider.dart';
 
 class MovieDescription extends StatefulWidget {
   final Search movie;
@@ -22,6 +24,7 @@ class MovieDescription extends StatefulWidget {
 class _MovieDescriptionState extends State<MovieDescription> {
   bool isLoading = true;
   late MovieDescriptionModel movieDescription;
+  late FavoritesController favoritesController;
   @override
   void initState() {
     loading().then((_) {
@@ -34,6 +37,7 @@ class _MovieDescriptionState extends State<MovieDescription> {
 
   @override
   Widget build(BuildContext context) {
+    favoritesController = Provider.of<FavoritesController>(context);
     return isLoading
         ? const LoadingPage()
         : LayoutBuilder(
@@ -268,6 +272,27 @@ class _MovieDescriptionState extends State<MovieDescription> {
                       )
                     ],
                   ),
+                ),
+                floatingActionButton: FloatingActionButton(
+                  onPressed: () {
+                    if (favoritesController.getFavoriteList
+                        .contains(widget.movie)) {
+                      favoritesController.removeFavorite(widget.movie);
+                    } else {
+                      favoritesController.addFavorite(widget.movie);
+                    }
+                  },
+                  backgroundColor: Colors.blueAccent,
+                  child:
+                      favoritesController.getFavoriteList.contains(widget.movie)
+                          ? const Icon(
+                              Icons.star,
+                              color: Colors.white,
+                            )
+                          : const Icon(
+                              Icons.star_outline,
+                              color: Colors.white,
+                            ),
                 ),
               );
             },

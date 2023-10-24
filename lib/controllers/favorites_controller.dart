@@ -6,29 +6,35 @@ class FavoritesController extends ChangeNotifier {
   List<Search> favoriteList = [];
   final db = FirebaseFirestore.instance;
   List<Search> get getFavoriteList => favoriteList;
-
   String username = 'fred';
 
-  /*
-      Como não implementamos um sistema de login coloquei o nome
-      do usuário de forma manual
-    */
-  initializeFavoriteList() async {
-    await db.collection('users').add({
-      "name": username,
-    });
-    favoriteList.clear();
+  FavoritesController() {
+    fetchFromFirebase();
+  }
+  fetchFromFirebase() async {
     await db
         .collection('users')
         .doc(username)
         .collection('movies')
         .get()
-        .then((QuerySnapshot<Map<String, dynamic>> snapshot) {
-      snapshot.docs.forEach((element) {});
+        .then((value) {
+      if (value.docs.isNotEmpty == true) {
+        for (var element in value.docs) {
+          favoriteList.add(Search(
+            imdbID: element.get('imdbID'),
+            poster: element.get('poster'),
+            title: element.get('title'),
+            type: element.get('type'),
+            year: element.get('year'),
+          ));
+        }
+      }
     });
-
-    notifyListeners();
   }
+  /*
+      Como não implementamos um sistema de login coloquei o nome
+      do usuário de forma manual
+    */
 
   addFavorite(Search movie) async {
     favoriteList.add(movie);
@@ -36,7 +42,19 @@ class FavoritesController extends ChangeNotifier {
         .collection('users')
         .doc(username)
         .collection('movies')
-        .add({"movie_id": "${movie.imdbID}"});
+        .where('imdbID', isEqualTo: "${movie.imdbID}")
+        .get()
+        .then((value) async {
+      if (value.docs.isEmpty == true) {
+        await db.collection('users').doc(username).collection('movies').add({
+          "title": "${movie.title}",
+          "year": "${movie.year}",
+          "imdbID": "${movie.imdbID}",
+          "type": "${movie.type}",
+          "poster": "${movie.poster}"
+        });
+      }
+    });
 
     notifyListeners();
   }
@@ -54,7 +72,7 @@ class FavoritesController extends ChangeNotifier {
         .collection('users')
         .doc(username)
         .collection('movies')
-        .where("movie_id", isEqualTo: "${movie.imdbID}")
+        .where("imdbID", isEqualTo: "${movie.imdbID}")
         .get()
         .then((value) async {
       await db.doc(value.docs.first.reference.path).delete();

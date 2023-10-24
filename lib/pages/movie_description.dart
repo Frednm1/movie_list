@@ -275,24 +275,38 @@ class _MovieDescriptionState extends State<MovieDescription> {
                 ),
                 floatingActionButton: FloatingActionButton(
                   onPressed: () {
-                    if (favoritesController.getFavoriteList
-                        .contains(widget.movie)) {
+                    if (favoritesController.getFavoriteList.where(
+                      (element) {
+                        if (element.imdbID == widget.movie.imdbID) {
+                          return true;
+                        } else {
+                          return false;
+                        }
+                      },
+                    ).isNotEmpty) {
                       favoritesController.removeFavorite(widget.movie);
                     } else {
                       favoritesController.addFavorite(widget.movie);
                     }
                   },
                   backgroundColor: Colors.blueAccent,
-                  child:
-                      favoritesController.getFavoriteList.contains(widget.movie)
-                          ? const Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            )
-                          : const Icon(
-                              Icons.star_outline,
-                              color: Colors.white,
-                            ),
+                  child: favoritesController.getFavoriteList.where(
+                    (element) {
+                      if (element.imdbID == widget.movie.imdbID) {
+                        return true;
+                      } else {
+                        return false;
+                      }
+                    },
+                  ).isNotEmpty
+                      ? const Icon(
+                          Icons.star,
+                          color: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.star_outline,
+                          color: Colors.white,
+                        ),
                 ),
               );
             },

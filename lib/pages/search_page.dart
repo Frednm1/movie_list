@@ -1,12 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:movie_list/components/movie_container_widget.dart';
-import 'package:movie_list/controllers/favorites_controller.dart';
 import 'package:movie_list/models/movies_model.dart';
-import 'package:movie_list/pages/movie_description.dart';
-import 'package:movie_list/services/request.dart';
-import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -16,16 +9,11 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final searchController = TextEditingController();
+  final searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool haveError = false;
-  bool haveData = false;
   late MoviesModel moviesList;
-  late FavoritesController favoritesController;
-  dynamic data;
   @override
   Widget build(BuildContext context) {
-    favoritesController = Provider.of<FavoritesController>(context);
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -67,7 +55,7 @@ class _SearchPageState extends State<SearchPage> {
                               return null;
                             }
                           },
-                          controller: searchController,
+                          controller: searchInputController,
                           autocorrect: true,
                           decoration: const InputDecoration(
                             filled: true,
@@ -88,6 +76,7 @@ class _SearchPageState extends State<SearchPage> {
                       onPressed: () {
                         _formKey.currentState!.validate() ? search() : null;
                         FocusScope.of(context).unfocus();
+                        searchInputController.clear();
                       },
                       icon: const Icon(
                         Icons.search,
@@ -98,41 +87,33 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-              haveError
-                  ? Column(
-                      children: [
-                        Text(data['Error']),
-                      ],
-                    )
-                  : haveData
-                      ? Expanded(
-                          child: ListView.builder(
-                            itemCount: moviesList.search!.length,
-                            padding: const EdgeInsets.only(
-                              bottom: 40,
-                            ),
-                            itemBuilder: (context, i) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return MovieDescription(
-                                          movie: moviesList.search![i]!,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: MovieContainerWidget(
-                                  movie: moviesList.search![i]!,
-                                ),
-                              );
-                            },
-                          ),
-                        )
-                      : Container(),
+              // Expanded(
+              //   child: ListView.builder(
+              //     itemCount: moviesList.search!.length,
+              //     padding: const EdgeInsets.only(
+              //       bottom: 40,
+              //     ),
+              //     itemBuilder: (context, i) {
+              //       return GestureDetector(
+              //         onTap: () {
+              //           Navigator.push(
+              //             context,
+              //             MaterialPageRoute(
+              //               builder: (context) {
+              //                 return MovieDescription(
+              //                   movie: moviesList.search![i]!,
+              //                 );
+              //               },
+              //             ),
+              //           );
+              //         },
+              //         child: MovieContainerWidget(
+              //           movie: moviesList.search![i]!,
+              //         ),
+              //       );
+              //     },
+              //   ),
+              // )
             ],
           ),
         );
@@ -141,26 +122,11 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   search() async {
-    var response = await Request().searchMovie(queryParemeters: {
-      "apikey": "e894a4f1",
-      "s": searchController.text,
-    });
-    data = jsonDecode(response.body);
-
-    /*
-      Quando a api do omdbapi não encontra nenhum filme ela retorna um erro e não uma lista vazia.
-      Ou seja se tentarmos colocar no model causaria um erro, por isso a verificação é necessária
-    */
-    if (data['Error']?.isNotEmpty == true) {
-      setState(() {
-        haveError = true;
-      });
-    } else {
-      setState(() {
-        haveError = false;
-        haveData = true;
-        moviesList = MoviesModel.fromJson(data);
-      });
-    }
+    print('buscar filme');
+    // var response = await Request().searchMovie(queryParemeters: {
+    //   "apikey": "e894a4f1",
+    //   "s": searchInputController.text,
+    // });
+    // data = jsonDecode(response.body);
   }
 }

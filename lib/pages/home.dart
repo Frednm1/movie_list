@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_list/controllers/favorites_controller.dart';
+import 'package:movie_list/controllers/home_controller.dart';
 import 'package:movie_list/pages/favorites.dart';
 import 'package:movie_list/pages/search_page.dart';
 import 'package:provider/provider.dart';
@@ -12,18 +13,18 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int currentPage = 0;
-  late PageController pc;
   late FavoritesController favoritesController;
+  late HomeController homeController;
   @override
   void initState() {
-    pc = PageController(initialPage: currentPage);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     favoritesController = Provider.of<FavoritesController>(context);
+    homeController = Provider.of<HomeController>(context);
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(
@@ -33,11 +34,13 @@ class _HomeState extends State<Home> {
               color: Colors.blueAccent,
             ),
             fixedColor: Colors.blueAccent,
-            currentIndex: currentPage,
+            currentIndex: homeController.getIndex,
             onTap: (index) {
-              pc.animateToPage(index,
-                  duration: const Duration(milliseconds: 400),
-                  curve: Curves.ease);
+              PageController().animateToPage(
+                index,
+                duration: const Duration(milliseconds: 400),
+                curve: Curves.ease,
+              );
             },
             items: const [
               BottomNavigationBarItem(
@@ -59,11 +62,9 @@ class _HomeState extends State<Home> {
             ],
           ),
           body: PageView(
-            controller: pc,
+            controller: PageController(),
             onPageChanged: (i) {
-              setState(() {
-                currentPage = i;
-              });
+              homeController.changeIndex(i);
             },
             children: const [
               SearchPage(),

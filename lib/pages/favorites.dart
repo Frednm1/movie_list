@@ -14,7 +14,6 @@ class Favorites extends StatefulWidget {
 class _FavoritesState extends State<Favorites> {
   late FavoritesController favoritesController;
   @override
-  @override
   Widget build(BuildContext context) {
     favoritesController = Provider.of<FavoritesController>(context);
     return Scaffold(

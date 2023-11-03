@@ -12,6 +12,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentPage = 0;
   late PageController pc;
+
   @override
   void initState() {
     pc = PageController(initialPage: currentPage);
@@ -69,27 +70,5 @@ class _HomeState extends State<Home> {
         );
       },
     );
-  }
-
-  toggleScreen(int value) {
-    if (value == 1) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return const Favorites();
-          },
-        ),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return const Home();
-          },
-        ),
-      );
-    }
   }
 }

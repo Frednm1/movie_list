@@ -20,3 +20,5 @@ Api utilizada: http://www.omdbapi.com/
 -GetX 👍
 -MobX 👎
 
+
+*Obs: Achei muito interessante a forma como utilizam o modelo singleton através da ingestão de dependências

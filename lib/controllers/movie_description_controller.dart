@@ -20,7 +20,7 @@ class MovieDescriptionController extends GetxController {
     if (data.statusCode == 200) {
       movie = MovieDescriptionModel.fromJson(jsonDecode(data.body));
     } else {
-      Exception('Something went wrong');
+      throw Exception('Something went wrong');
     }
     loading.value = false;
   }

@@ -17,5 +17,8 @@ Api utilizada: http://www.omdbapi.com/
 -Riverpod 👎
 -Bloc 👎
 -Triple 👎
--GetX 👎
+-GetX 👍
 -MobX 👎
+
+
+*Obs: Achei muito interessante a forma como utilizam o modelo singleton através da ingestão de dependências

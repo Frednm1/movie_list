@@ -19,3 +19,6 @@ Api utilizada: http://www.omdbapi.com/
 -Triple 👎
 -GetX 👍
 -MobX 👎
+
+
+Obs: O Provider apresenta uma limitação na gerência de estado da aplicação em segundo plano.

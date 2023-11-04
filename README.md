@@ -17,5 +17,6 @@ Api utilizada: http://www.omdbapi.com/
 -Riverpod 👎
 -Bloc 👎
 -Triple 👎
--GetX 👎
+-GetX 👍
 -MobX 👎
+

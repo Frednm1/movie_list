@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_list/bindings/favorites_binding.dart';
+import 'package:movie_list/bindings/movie_description_binding.dart';
 import 'package:movie_list/controllers/favorites_controller.dart';
 import 'package:movie_list/controllers/movie_description_controller.dart';
 import 'package:movie_list/models/movies_model.dart';
@@ -23,8 +25,10 @@ class _MovieDescriptionState extends State<MovieDescription> {
   @override
   void initState() {
     super.initState();
-    movieDescription = MovieDescriptionController();
-    favoritesController = FavoritesControllerSingleton().getFavoritesController;
+    setUpFavorites();
+    setUpMovieDescription();
+    movieDescription = Get.find<MovieDescriptionController>();
+    favoritesController = Get.find<FavoritesController>();
     movieDescription.fetchMovieData(widget.movie.imdbID!);
   }
 

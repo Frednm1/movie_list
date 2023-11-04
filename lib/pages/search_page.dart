@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_list/bindings/search_binding.dart';
 import 'package:movie_list/components/movie_container_widget.dart';
 import 'package:movie_list/controllers/search_page_controller.dart';
 import 'package:movie_list/pages/loading_page.dart';
@@ -19,7 +20,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
-    controller = SearchPageControllerSingleton().getSearchController;
+    setUpSearch();
+    controller = Get.find<SearchPageController>();
   }
 
   @override

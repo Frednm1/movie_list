@@ -29,9 +29,3 @@ class SearchPageController extends GetxController {
     searchedItems.clear();
   }
 }
-
-/* A classe abaixo garante que haverá apenas uma instância de SearchPageController() */
-class SearchPageControllerSingleton {
-  static final searchPageController = SearchPageController();
-  SearchPageController get getSearchController => searchPageController;
-}

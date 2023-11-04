@@ -35,9 +35,3 @@ class FavoritesController extends GetxController {
     loading.value = false;
   }
 }
-
-/* A classe abaixo garante que haverá apenas uma instância de FavoritesController() */
-class FavoritesControllerSingleton {
-  static final favoritesController = FavoritesController();
-  FavoritesController get getFavoritesController => favoritesController;
-}

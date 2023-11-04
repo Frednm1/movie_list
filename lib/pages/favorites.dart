@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_list/bindings/favorites_binding.dart';
 import 'package:movie_list/components/movie_container_widget.dart';
 import 'package:movie_list/controllers/favorites_controller.dart';
 import 'package:movie_list/pages/loading_page.dart';
@@ -18,7 +19,8 @@ class _FavoritesState extends State<Favorites> {
   @override
   void initState() {
     super.initState();
-    controller = FavoritesControllerSingleton().getFavoritesController;
+    setUpFavorites();
+    controller = Get.find<FavoritesController>();
   }
 
   @override

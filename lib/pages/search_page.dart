@@ -1,17 +1,18 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:movie_list/models/movies_model.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:movie_list/components/movie_container_widget.dart';
+import 'package:movie_list/pages/movie_description.dart';
+import 'package:movie_list/store/search_store.dart';
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
+class SearchPage extends StatelessWidget {
   final searchInputController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  late MoviesModel moviesList;
+  final store = SearchStore();
+  SearchPage({
+    Key? key,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -87,33 +88,47 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
               ),
-              // Expanded(
-              //   child: ListView.builder(
-              //     itemCount: moviesList.search!.length,
-              //     padding: const EdgeInsets.only(
-              //       bottom: 40,
-              //     ),
-              //     itemBuilder: (context, i) {
-              //       return GestureDetector(
-              //         onTap: () {
-              //           Navigator.push(
-              //             context,
-              //             MaterialPageRoute(
-              //               builder: (context) {
-              //                 return MovieDescription(
-              //                   movie: moviesList.search![i]!,
-              //                 );
-              //               },
-              //             ),
-              //           );
-              //         },
-              //         child: MovieContainerWidget(
-              //           movie: moviesList.search![i]!,
-              //         ),
-              //       );
-              //     },
-              //   ),
-              // )
+              Observer(
+                builder: (context) {
+                  return store.loading
+                      ? const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Center(
+                                child: CircularProgressIndicator(
+                              color: Colors.red,
+                            )),
+                          ],
+                        )
+                      : Expanded(
+                          child: ListView.builder(
+                            itemCount: store.movieList.length,
+                            padding: const EdgeInsets.only(
+                              bottom: 40,
+                            ),
+                            itemBuilder: (context, i) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return MovieDescription(
+                                          movie: store.movieList[i]!,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                },
+                                child: MovieContainerWidget(
+                                  movie: store.movieList[i]!,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                },
+              )
             ],
           ),
         );
@@ -122,11 +137,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   search() async {
-    print('buscar filme');
-    // var response = await Request().searchMovie(queryParemeters: {
-    //   "apikey": "e894a4f1",
-    //   "s": searchInputController.text,
-    // });
-    // data = jsonDecode(response.body);
+    store.setLoading(true);
+    await store.search(searchInputController.value.text);
+    store.setLoading(false);
   }
 }
